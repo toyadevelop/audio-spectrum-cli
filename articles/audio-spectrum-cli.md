@@ -32,7 +32,13 @@ python generate_test_wav.py --type chirp --output chirp.wav
 python analyze.py chirp.wav --mode spectrogram --output spec.png --n-fft 1024 --db-range 80
 ```
 
-`--mode spectrum` は従来の静止スペクトル、`--mode spectrogram` は時間ごとの周波数分布を表示します。スペクトログラムの周波数軸は既定で対数ですが、`--frequency-scale linear` で線形にできます。`--db-range 80` は表示範囲をスペクトルのピークから80 dB下までに制限し、微小なノイズでカラーマップが引き伸ばされるのを防ぎます。
+`--mode spectrum` は従来の静止スペクトル、`--mode spectrogram` は時間ごとの周波数分布を表示します。スペクトログラムの周波数軸は既定で対数ですが、`--frequency-scale linear` で線形にできます。たとえば線形軸で描く場合は次のように指定します。
+
+```bash
+python analyze.py chirp.wav --mode spectrogram --frequency-scale linear --output spec-linear.png --n-fft 1024
+```
+
+`--db-range 80` は、信号のピークを上限（最大0 dBFS）に、そこから80 dB下までをカラーマップに表示します。表示幅を固定することで、微小なノイズに埋もれず主成分を確認できます。
 
 ## 時間波形と振幅の正規化
 
